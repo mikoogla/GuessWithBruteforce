@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string.h>
 
-#define MAX_LENGTH 10
-#define MIN_LENGTH 10
+#define MAX_LENGTH 12
+#define MIN_LENGTH 1
 
 bool isAllEnd(char character, char *string, int stop)
 {
@@ -17,7 +17,7 @@ bool isAllEnd(char character, char *string, int stop)
 }
 int returnAlphaIndex(char c, char *alpha)
 {
-    for (int i = 0; i < sizeof(alpha) - 1; i++)
+    for (int i = 0; i < strlen(alpha) - 1; i++)
     {
         if (*(alpha + i) == c)
         {
@@ -31,6 +31,10 @@ int incrementLeft(char *alpha, char *guess, int *index)
 
     for (int i = *index; i >= 0; i--)
     {
+        if (i == 0)
+        {
+            printf("%c\n", *guess);
+        }
         if (guess[i] != alpha[strlen(alpha) - 1])
         {
             int alphaindex = returnAlphaIndex(guess[i], alpha);
@@ -85,8 +89,8 @@ int main()
 
     printf("-%s-\n", guess);
 
-    char pass[] = "ewewwewewe";
-    char alpha[] = "we";
+    char pass[] = "losaq3333";
+    char alpha[] = "qaslo123x5";
 
     for (int i = MIN_LENGTH; i <= MAX_LENGTH; i++)
     {
