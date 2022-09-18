@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string.h>
 
-#define MAX_LENGTH 33
-#define MIN_LENGTH 1
+#define MAX_LENGTH 10
+#define MIN_LENGTH 10
 
 bool isAllEnd(char character, char *string, int stop)
 {
@@ -28,13 +28,14 @@ int returnAlphaIndex(char c, char *alpha)
 }
 int incrementLeft(char *alpha, char *guess, int *index)
 {
+
     for (int i = *index; i >= 0; i--)
     {
         if (guess[i] != alpha[strlen(alpha) - 1])
         {
             int alphaindex = returnAlphaIndex(guess[i], alpha);
-            guess[i] = alpha[alphaindex + 1];
-            for (int j = i + 1; j > i; j--)
+            *(guess + i) = alpha[alphaindex + 1];
+            for (int j = i + 1; j <= *index; j++)
             {
                 guess[j] = alpha[0];
             }
@@ -52,7 +53,7 @@ int brute(char *pass, char *alpha, char *guess, int *index)
     {
         while (*(guess + *index) != alpha[strlen(alpha) - 1])
         {
-//            printf("%s\n", guess);
+
             if (strcmp(pass, guess) == 0)
             {
                 printf("password is %s\n", guess);
@@ -61,10 +62,10 @@ int brute(char *pass, char *alpha, char *guess, int *index)
             alphaindex++;
             *(guess + *index) = alpha[alphaindex];
         }
-//        printf("%s\n", guess);
+
         if (strcmp(pass, guess) == 0)
         {
-            printf("guessed word is %s\n", guess);
+            printf("password is %s\n", guess);
             return 0;
         }
         alphaindex = 0;
@@ -84,8 +85,8 @@ int main()
 
     printf("-%s-\n", guess);
 
-    char pass[] = "qwerty";
-    char alpha[] = "ytrewq";
+    char pass[] = "ewewwewewe";
+    char alpha[] = "we";
 
     for (int i = MIN_LENGTH; i <= MAX_LENGTH; i++)
     {
@@ -99,7 +100,7 @@ int main()
         {
             return 0;
         }
-        memset(guess, '\0', MAX_LENGTH);
+        memset(guess, '\0', MAX_LENGTH + 10);
     }
     return 0;
 }
